@@ -1,11 +1,14 @@
 package it.app;
 
+import it.app.panel.HomePanel;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class App {
 
     private JFrame frame;
+    private HomePanel homePanel;
 
 
     /**
@@ -39,7 +42,8 @@ public class App {
         frame.setBounds(100, 100, 350, 450);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
-
+        homePanel = new HomePanel();
+        frame.getContentPane().add(homePanel);
 
 
     }
