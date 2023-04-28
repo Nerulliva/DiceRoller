@@ -1,9 +1,9 @@
 package it.app.panel;
 
+import it.app.logic.Roller;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class HomePanel extends JPanel {
     private JLabel l_nDadi;
@@ -13,6 +13,7 @@ public class HomePanel extends JPanel {
     private JComboBox cb_tDadi;
     private JTextField tf_risultato;
     private JButton roll;
+    private Roller roller = new Roller();
 
     public HomePanel(){
         super();
@@ -20,6 +21,7 @@ public class HomePanel extends JPanel {
         setBackground(Color.LIGHT_GRAY);
         setLayout(null);
         init();
+        action();
     }
 
     private void init(){
@@ -52,7 +54,14 @@ public class HomePanel extends JPanel {
         roll = new JButton("Tira");
         roll.setBounds(100,250,100,50);
         this.add(roll);
+    }
 
-        roll.addActionListener(e -> tf_risultato.setText("Bravo hai tirato,ciuccialo a Ivano"));
+    private void action(){
+        roll.addActionListener(e -> {
+            int numDadi = (int) sp_nDadi.getValue();
+            String tipoDadi = (String) cb_tDadi.getItemAt(cb_tDadi.getSelectedIndex());
+            String res = String.valueOf(roller.roll(numDadi,tipoDadi));
+            tf_risultato.setText(res);
+        });
     }
 }
