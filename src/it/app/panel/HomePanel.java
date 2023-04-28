@@ -49,6 +49,7 @@ public class HomePanel extends JPanel {
         tf_risultato = new JTextField();
         tf_risultato.setEditable(false);
         tf_risultato.setBounds(100,185,100,30);
+        tf_risultato.setHorizontalAlignment(JTextField.CENTER);
         this.add(tf_risultato);
 
         roll = new JButton("Tira");
