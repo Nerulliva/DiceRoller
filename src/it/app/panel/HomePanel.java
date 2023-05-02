@@ -34,10 +34,15 @@ public class HomePanel extends JPanel {
         SpinnerNumberModel value = new SpinnerNumberModel(1,1,20,1);
         sp_nDadi = new JSpinner(value);
         sp_nDadi.setBounds(155,50,100,30);
+        JComponent editor = sp_nDadi.getEditor();
         this.add(sp_nDadi);
 
         cb_tDadi = new JComboBox(new String[]{"d4","d6","d8","d10","d12","d20","d100"});
         cb_tDadi.setBounds(155,100,100,30);
+        // allineamento center item combobox
+        DefaultListCellRenderer listRenderer = new DefaultListCellRenderer();
+        listRenderer.setHorizontalAlignment(DefaultListCellRenderer.CENTER); // center-aligned items
+        cb_tDadi.setRenderer(listRenderer);
         this.add(cb_tDadi);
 
         l_risultato = new JLabel("Risultato");
