@@ -3,18 +3,22 @@ package it.app.logic;
 import java.util.Random;
 
 public class Roller {
-    private int[]risultati;
+    private String[]risultati;
+
+    public String[] getRisultai(){
+        return this.risultati;
+    }
 
     public String roll(int nDadi,String tDadi){
         int res = 0;
-        risultati = new int[nDadi];
+        risultati = new String[nDadi];
         int tipoDado = Integer.parseInt(tDadi.substring(1));
         Random rand = new Random();
 
         for(int i=0;i<nDadi;i++){
             int value = (rand.nextInt(tipoDado)) +1;
             res += value;
-            risultati[i] = value;
+            risultati[i] = String.valueOf(value);
         }
         return String.valueOf(res);
     }

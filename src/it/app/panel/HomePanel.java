@@ -3,6 +3,10 @@ package it.app.panel;
 import it.app.logic.Roller;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.MutableAttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,12 +18,13 @@ public class HomePanel extends JPanel {
     private JSpinner sp_nDadi;
     private JComboBox cb_tDadi;
     private JTextField tf_risultato;
-    private JTextArea tf_risultati;
+    private JTextPane tp_risultati;
     private JButton roll;
+    private JLabel l_tot;
 
     public HomePanel(){
         super();
-        setBounds(25, 10, 300, 400);
+        setBounds(18, 10, 300, 400);
         setBackground(Color.LIGHT_GRAY);
         setLayout(null);
         init();
@@ -55,31 +60,72 @@ public class HomePanel extends JPanel {
         l_risultato.setBounds(125,150,100,30);
         this.add(l_risultato);
 
+       // tf_risultati = new JTextField()
+        tp_risultati = new JTextPane();
+        tp_risultati.setEditable(false);
+        tp_risultati.setBounds(25,185,250,100);
+        //tf_risultati.setHorizontalAlignment(JTextField.CENTER);
+        this.add(tp_risultati);
+
+        l_tot = new JLabel("Totale");
+        l_tot.setBounds(120,290,100,30);
+        this.add(l_tot);
+
         tf_risultato = new JTextField();
         tf_risultato.setEditable(false);
-        tf_risultato.setBounds(100,185,100,30);
+        tf_risultato.setBounds(176,290,100,30);
         tf_risultato.setHorizontalAlignment(JTextField.CENTER);
         this.add(tf_risultato);
-
-       // tf_risultati = new JTextField()
-        tf_risultati = new JTextArea();
-        tf_risultati.setEditable(false);
-        tf_risultati.setBounds(25,220,250,100);
-        //tf_risultati.setHorizontalAlignment(JTextField.CENTER);
-        this.add(tf_risultati);
 
         roll = new JButton("Tira");
         roll.setBounds(100,350,100,50);
         this.add(roll);
 
         roll.addActionListener(e ->{
+            tp_risultati.setText(" ");
             Roller roller = new Roller();
             int nDadi = (int) sp_nDadi.getValue();
             String tdadi = (String) cb_tDadi.getItemAt(cb_tDadi.getSelectedIndex());
             tf_risultato.setText(roller.roll(nDadi,tdadi));
-            tf_risultati.setText(roller.printRisultati());
+            //tp_risultati.setText(roller.printRisultati());
+
+
+            try{
+                setStyle(roller.getRisultai(),Integer.parseInt(tdadi.substring(1)) );
+            }catch(BadLocationException ex){
+                System.out.println(ex.getMessage());
+            }
+
         });
     }
+
+    public void setStyle(String [] risultati, int tipoDado) throws BadLocationException {
+        MutableAttributeSet verde = new SimpleAttributeSet(tp_risultati.getInputAttributes());
+        StyleConstants.setForeground(verde, Color.GREEN);
+
+        MutableAttributeSet rosso = new SimpleAttributeSet(tp_risultati.getInputAttributes());
+        StyleConstants.setForeground(rosso, Color.RED);
+
+        MutableAttributeSet nero = new SimpleAttributeSet(tp_risultati.getInputAttributes());
+        StyleConstants.setForeground(nero, Color.BLACK);
+
+        for(int i =0; i<risultati.length; i++){
+            String str = risultati[i];
+
+            if(str.equals("1")){
+                tp_risultati.getStyledDocument().insertString(tp_risultati.getDocument().getLength(),str,rosso);
+            }else if(str.equals(String.valueOf(tipoDado))){
+                tp_risultati.getStyledDocument().insertString(tp_risultati.getDocument().getLength(),str,verde);
+            }else{
+                tp_risultati.getStyledDocument().insertString(tp_risultati.getDocument().getLength(),str,nero);
+            }
+
+            if(i != risultati.length-1){
+                tp_risultati.getStyledDocument().insertString(tp_risultati.getDocument().getLength()," + ",nero);
+            }
+        }
+    }
+
 }
 
 

@@ -43,6 +43,7 @@ public class App {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
         frame.setTitle("DiceRoller");
+        frame.setResizable(false);
         homePanel = new HomePanel();
         frame.getContentPane().add(homePanel);
 
