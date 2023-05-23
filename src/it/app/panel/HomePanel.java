@@ -1,5 +1,6 @@
 package it.app.panel;
 
+import it.app.customSwing.MyButton;
 import it.app.logic.Roller;
 
 import javax.swing.*;
@@ -8,8 +9,6 @@ import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class HomePanel extends JPanel {
     private JLabel l_nDadi;
@@ -21,6 +20,8 @@ public class HomePanel extends JPanel {
     private JTextPane tp_risultati;
     private JButton roll;
     private JLabel l_tot;
+    private MyButton saluta;
+    private MyButton insulta;
 
     public HomePanel(){
         super();
@@ -129,5 +130,3 @@ public class HomePanel extends JPanel {
 }
 
 
-// per la prossima volta cambio colore tipo 1 rosso e 20 verde
-//  tasto reset
