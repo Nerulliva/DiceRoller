@@ -39,11 +39,10 @@ public class App {
      */
     private void initialize() {
         frame = new JFrame();
-        frame.setBounds(100, 100, 350, 450);
+        frame.setBounds(100, 100, 350, 600);
+        //frame.setBounds(100, 100, 350, 450); // originale, no prova btn insulta
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
-        frame.setTitle("DiceRoller");
-        frame.setResizable(false);
         homePanel = new HomePanel();
         frame.getContentPane().add(homePanel);
 
